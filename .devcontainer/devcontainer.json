@@ -3,7 +3,34 @@
 {
 	"name": "Go",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm"
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"launch": {
+					"version": "0.2.0",
+					"configurations": [{
+						"name": "Launch Package",
+						"type": "go",
+						"request": "launch",
+						"mode": "auto",
+						"console": "integratedTerminal",
+						"program": "${fileDirname}"
+					}],
+					"compounds": []
+				},
+				"remote.extensionKind": {
+					"WakaTime.vscode-wakatime": [
+						"ui" // Run on host to keep token. Probably integrate with 1Password & env var.
+					]
+				}
+			},
+			"extensions": [
+				"eamodio.gitlens",
+				"WakaTime.vscode-wakatime"
+			]
+		}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -12,10 +39,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "go version",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
+	"postCreateCommand": "git config --global --add safe.directory /workspaces/coursera.org",
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
